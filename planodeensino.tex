@@ -1,0 +1,192 @@
+\documentclass[11pt,PlanoEnsino]{uftex2}
+
+
+\begin{document}
+
+\sloppy
+\onehalfspace
+
+% @params
+% <disciplina><periodo>
+%\cabecalho{Sistemas Digitais}{2015/02}
+
+\begin{longtable}{|c|c|c|c|c|}
+\hline
+
+% @params
+% <nome do curso>
+%\curso{Bacharelado em Ciência da Computação}
+%\hline
+
+% @params
+% <disciplina><periodo>
+\disciplina{Sistemas Digitais}{2015/02}
+\hline
+
+% @params
+% <disciplinas>
+\prerequisito{
+Física Teórica e Experimental 2
+
+Lógica Matemática
+}
+\hline
+
+% @params
+% <nome do professor>
+\docente{Tiago da Silva Almeida}
+\hline
+
+% @params
+% <total><teorica><pratica><presencial><distancia>
+\carga{60}{45}{15}{ }{ }
+\hline
+
+% @params
+% <ementa>
+\ementa{Álgebra Booleana; Portas Lógicas; Circuitos Combinacionais; Projeto de sistemas combinacionais; Circuitos Seqüenciais; Flip-Flops; Contadores e Registradores, máquinas de estado finitos; Projeto de Sistemas Seqüenciais ; Aritmética Digital: circuitos e Operações aritméticas; Interface com o Mundo Analógico; Dispositivos de Memória; Dispositivos de Lógica Programável.}
+\hline
+
+% @params
+% <objetivo>
+\objetivos{
+\textbf{Geral:}
+
+\begin{itemize}
+\item Apresentar os conceitos de lógica digital, de maneira a proporcionar uma visão interna dos circuitos que compõe um computador.
+\end{itemize}
+
+\textbf{Específicos:}
+
+\begin{itemize}
+\item O estudo de Sistemas Digitais possibilita a abstração de conceitos, dificilmente visíveis pelo emprego de ferramentas, visto que serão estudados os cálculos binários executados pelos componentes de um computador através da Álgebra de Boole, portas lógicas e demais teorias. 
+
+\item O conhecimento das bases de um componente computacional possibilitará ao aluno desenvolver com maior clareza as aplicações, bem como projetar sistemas que envolvam de alguma forma a necessidade de conhecimento do funcionamento de um computador. 
+\item Os conhecimentos adquiridos nesta disciplina fornecerão ao aluno os subsídios teóricos e lógicos para explicar os circuitos básicos de um computador.
+\end{itemize}
+}
+\hline
+\tblconteudopresencial
+\hline
+
+% @params
+% <numero da aula><descrição do conteúdo>
+\conteudo{1}{Álgebra das variáveis lógicas}
+\conteudo{2}{Representação de variáveis lógicas por tensões elétricas}
+\conteudo{3}{Teoremo de D Morgan e diagramas de Venn}
+\conteudo{4}{Funções Lógicas}
+\conteudo{5}{Mapas de Karnaugh e simplificação de funções lógicas}
+\conteudo{6}{Circuitos combinacionais básicos}
+\conteudo{7}{Codificadores e decodificadores}
+\conteudo{8}{Multiplexadores e demultiplexadores}
+\conteudo{9}{Latchs, Flip-flop mestre-escravo, JK, D} 
+\conteudo{10}{Registradores, transferência entre registradores e regisitradores de deslocamento}
+\conteudo{11}{Contadores em anel, anel torcido, sincrônos e por pulsação}
+\conteudo{12}{Representação de números com sinal}
+\conteudo{13}{Somadores, subtratores, multiplicadores e divisores}
+\conteudo{14}{Memória de acesso aleatório, somente leitura. Memórias programáveis e apagáveis}
+\conteudo{15}{Circuitos sequenciais de Mealy e Moore}
+\conteudo{16}{Controladores de transferência de registradores, sinsíveis à comandos múltiplos e de registrador de deslocamento}
+\conteudo{17}{Instruções de computadores e microprogramação}
+\conteudo{18}{Instruções de um, dois e três bytes no 8080, para movimento de dados, aritméticas e de I/O}
+
+%\hline
+%\tblconteudodistancia
+%\hline
+
+% @params
+% <numero da aula><descrição do conteúdo>
+%\conteudo{1}{Apresentação de vídeos da proposta de desenvolvimento de software (produto)}
+
+%\hline
+
+% @params
+% <teórica><pratica><distancia><interdisciplinar><recursos>
+\metodologia{
+
+\begin{itemize}[partopsep=0pt, topsep=-\parskip, parsep=0pt, itemsep=0pt, leftmargin=.5cm]
+\item Aulas expositivas;
+\item Lista de Exercícios;
+\item Avaliações.
+\end{itemize}
+
+}{
+
+\begin{itemize}
+\item Experimentos em laboratório;
+\end{itemize}
+
+}{
+
+}{
+
+\begin{itemize}
+\item Lógica Matemática;
+\item Organização de computadores;
+\item Compiladores.
+\end{itemize}
+
+}{
+
+\begin{itemize}
+\item Simulador de linguagem Assembly;
+\item Laboratório de Hardware;
+\item Laboratorista
+\end{itemize}
+
+}
+\hline
+
+% @params
+% <forma de avaliacao>
+\avaliacao{ 
+Avaliações valendo de 0 a 10 pontos com peso de 70\%. Trabalhos e exercícios em sala de aula valendo de 0 a 10 pontos com peso de 30\%. A média final é obtida perante o seguinte cálculo:
+
+\[
+M_f= \left( \left( \frac{ \sum_{i=1}^{n} P_i }{n} \right) \times 0,7 \right)+
+     \left( \left( \frac{ \sum_{j=1}^{m} T_j }{m} \right) \times 0,3 \right)
+\]
+tal que, $Pi$ corresponde a nota da i-ésima avaliação, $Tj$ corresponde a nota do j-ésimo trabalho ou exercícios, $n$ o número de avaliações e $m$ o número de trabalhos.
+
+Sendo que os alunos aprovados deverão obter obrigatoriamente $M_f \geq 7,0$. Alunos com media final $4,0 \leq M_f \geq 6,9$ farão exame final. Por fim, alunos com média final $M_f<4,0$ estarão reprovados. O aluno em exame final deverá atingir nota $\frac{M_f+Exame}{2}\geq 5,0$.
+
+Em caso algum aluno perca alguma das $P_i$ avaliações, por algum motivo especial, como em caso de doença e devidamente protocolado o pedido de substitutiva, será aplicada somente uma avaliação substitutiva ao final do semestre englobando todo o conteúdo ministrado.
+
+}
+\hline
+
+% @params
+% <bibliografia>
+\bibbasica{
+\begin{enumerate}
+\item TOCCI, Ronald J., WIDMER, Neal S. Sistemas Digitais Princípios e Aplicações. Editora LTC – RJ, 11 ed. 2005.
+{\color{red} \item CAPUANO, Francisco G. Sistemas Digitais - Circuitos Combinacionais e Sequenciais. Erica - SP, 144p, 2014.
+\item VAHID, Frank. Sistemas Digitais - Projeto, Otimização e Hdls. Bookman - SP, 558 p., 2008.
+\item DIAS, Morgado. Sistemas Digitais. Princípios E Prática. FCA - RJ, 2 ed., 506 p., 2011.
+\item SZAJNBERG, Mordka. Eletrônica Digital - Teoria, Componentes e Aplicações. LTC - RJ, 476 p., 2014.
+\item HETEM JUNIOR, Annibal. Fundamentos de Informática - Eletrônica Básica para Computação. LTC - RJ, 234 p., 2009.}
+\end{enumerate}
+}
+\hline
+
+% @params
+% <bibliografia>
+\bibcomplementar{
+\begin{enumerate}
+\item TOCCI, Ronald J., AMBROSIO, Frank J., LASKOWSK, Lester P. Microprocessors and microcomputers :hardware and software. Prentice Hall,5 ed., 565p., 2000.
+\item BREY, Barry B. The Intel microprocessors :8086 8088, 80186 80188, 80286, 80386, 80486, Pentium, Pentium Pro, and Pentium II processors : architecture, programming, and interfacing. Prentice Hall, 5 ed., 966 p., 2000.
+\item RABAEY, Jan M. Digital integrated circuits :a design perspective. Prentice Hall, 702 p., 1996.
+\item IDOETA, Ivan Valeije. Elementos de eletrônica digital. Érica - SP, 4 ed., 524 p., 2010.
+\item GARCIA, Paulo Alves., MARTINI, Jose Sidnei Colombo,.Eletronica digital:teoria e laboratorio. Erica - SP, 2.ed., 182p., 2008.
+\item GARUE, Sergio. Eletronica digital:circuitos e tecnologias LSI e VLSI. Hemus - SP, 299p., 2004.
+\end{enumerate}
+}
+\hline
+\end{longtable} 
+
+% @params
+% <nome do professor>
+\assinatura{Tiago da Silva Almeida}
+
+\end{document}
+
