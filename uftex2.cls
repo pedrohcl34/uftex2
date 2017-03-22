@@ -1,6 +1,6 @@
 \def\filename{uftex2.dtx}
-\def\fileversion{v1.2.0}
-\def\filedate{2016/03/09}
+\def\fileversion{v2.0.0}
+\def\filedate{2017/03/21}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass {uftex2} [\filedate\ \fileversion\ Classe personalizada para o curso de Ciência da Computação da UFT - CUP]
 
@@ -31,6 +31,7 @@
 \RequirePackage{setspace}
 % --------------- Tabelas maiores que quebram com a nova página
 \RequirePackage{longtable}
+\RequirePackage{mdframed}
 % --------------- Utilização de cores
 \RequirePackage{color}
 \definecolor{azul}{RGB}{000,074,128}
@@ -86,7 +87,7 @@ xleftmargin=10pt,
 xrightmargin=10pt
 }  
 % --------------- Margens
-\RequirePackage[a4paper,top=3cm,bottom=2.0cm,left=3.0cm,right=2.cm]{geometry} 
+\RequirePackage[a4paper,top=2cm,bottom=2.0cm,left=3.0cm,right=2.cm]{geometry} 
 % --------------- Links em preto
 \RequirePackage[pdftex,unicode=true,plainpages=false,pdfpagelabels,pagebackref,colorlinks=true,citecolor=black,linkcolor=black,urlcolor=black,filecolor=black,bookmarksopen=true]{hyperref}
 % --------------- Garantir que dois ou mais blocos de texto ocupam o mesmo espaço horizontal na página.
@@ -98,9 +99,19 @@ xrightmargin=10pt
 % --------------- Este pacote pode desativar toda a hifenização ou ativar a hifenização de fontes não-alfabéticos ou monoespaçadas.
 \RequirePackage{hyphenat}
 % --------------- Cabeçalho e rodapé
-\RequirePackage{fancyhdr}
+%\RequirePackage{fancyhdr}
 % --------------- Utilizado para construir a capa e folha de rosto
 \RequirePackage{tabularx}
+
+\RequirePackage{titlesec}
+
+\RequirePackage{newtxmath,newtxtext}
+
+%\RequirePackage{hyperref}
+
+\RequirePackage{helvet}
+
+\RequirePackage{lineno}
 % ------------------------------------------------------------------------------------------------------ %
 % --------------- Redefinição de comandos e criação de comandos básicos para documento
 % ------------------------------------------------------------------------------------------------------ %
@@ -118,6 +129,9 @@ xrightmargin=10pt
   \ifthenelse{\equal{#1}{CC}}
     {\global\def\local@deptname{Ci{\^ e}ncia da Computa{\c c}{\~ a}o}
      \global\def\foreign@deptname{Computer Science}}{}
+   \ifthenelse{\equal{#1}{AL}}
+    {\global\def\local@deptname{Engenharia de Alimentos}
+     \global\def\foreign@deptname{Food Engineering}}{}
 }
 % ------------------------------------------------------------------------------------------------------ %
 \renewcommand\title[1]{%
@@ -128,12 +142,6 @@ xrightmargin=10pt
   \global\def\@authname{#1}
   \global\def\@authsurn{#2}
 }
-\newcommand\local@universityname{Universidade Federal do Tocantins}
-\newcommand\local@deptstring{Curso}
-\newcommand\foreign@deptstring{Course}
-\newcommand\local@cityname{Palmas}
-\newcommand\local@statename{TO}
-\newcommand\local@countryname{Brasil}
 
 \renewcommand\date[2]{%
   \month=#1
@@ -145,175 +153,154 @@ xrightmargin=10pt
   \global\def\@termnumber{#2}
 }
 
-\newcommand\local@monthname{\ifcase\month\or
+\newcommand{\mybox}[1]{\par\noindent\colorbox{cor}
+{\parbox{\textwidth-2\fboxsep\relax}{\color{cortexto}\centering #1}}}
+
+\renewcommand\title[1]{%
+  \global\def\local@title{#1}%
+}
+
+\newcommand\address[1]{%
+  \global\def\local@address{#1}%
+}
+
+\newcommand\cep[1]{%
+  \global\def\local@cep{#1}%
+}
+
+\newcommand\phone[1]{%
+  \global\def\local@phone{#1}%
+}
+
+\newcommand\mail[1]{%
+  \global\def\local@mail{#1}%
+}
+
+\newcommand\matricula[1]{%
+  \global\def\local@matricula{#1}%
+}
+
+\newcommand\codigo[1]{%
+  \global\def\local@codigo{#1}%
+}
+
+\newcommand\creditos[1]{%
+  \global\def\local@creditos{#1}%
+}
+
+\newcommand\turma[1]{%
+  \global\def\local@turma{#1}%
+}
+
+\newcommand\carga[1]{%
+  \global\def\local@carga{#1}%
+}
+
+\newcommand\tipo[1]{%
+  \global\def\local@tipo{#1}%
+}
+
+\newcommand\city[1]{%
+  \global\def\local@city{#1}%
+}
+
+\renewcommand\date[3]{%
+  \day=#1
+  \month=#2
+  \year=#3
+}
+
+\newcommand\monthname{\ifcase\month\or
   Janeiro\or Fevereiro\or Mar{\c c}o\or Abril\or Maio\or Junho\or
   Julho\or Agosto\or Setembro\or Outubro\or Novembro\or Dezembro\fi}
-\newcommand\foreign@monthname{\ifcase\month\or
-  January\or February\or March\or April\or May\or June\or
-  July\or August\or September\or October\or November\or December\fi}
-% ------------------------------------------------------------------------------------------------------ %
-% Inicio Plano de Ensino
-% ------------------------------------------------------------------------------------------------------ %
 
-\DeclareOption{PlanoEnsino}{
-
-\geometry{a4paper,
-  top=5cm,              % distance of the text block from the top of the page
-  headheight=4cm, % height for the header block
-  headsep=12pt,     % distance from the header block to the text block
-  heightrounded,      % ensure an integer number of lines
-  left=2cm,
-  right=2cm,
-  bottom=2cm
-}
-
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[C]{
-\includegraphics[scale=.3]{logouft}\\
-\large{UNIVERSIDADE FEDERAL DO TOCANTINS\\
-CAMPUS UNIVERSIT\'ARIO DE PALMAS\\
-BACHARELADO EM CI\^ENCIA DA COMPUTA\c{C}\~AO}}
-\lfoot{P\'agina \thepage\ de \pageref{LastPage} } 
-
-\newcommand{\cabecalho}[2] {
-\begin{center}
-\large{\textbf{Plano de Ensino - #1}} \\
-\large{\textbf{Período: #2}}
-\end{center}}
-
-\newcommand{\tbltitulo}[1] {
-\multicolumn{5}{|l|}{\cellcolor{verde} \textcolor{white}{\bf #1}}}
-
-\newcommand{\tbltitulodois}[1] {
-\cellcolor{verde} \textcolor{white}{\bf #1}}
-
-\newcommand{\curso}[1] {
-\tbltitulo{Curso} \\ 
-\multicolumn{5}{|l|}{#1} \\ }
-
-\newcommand{\disciplina}[2] {
-\multicolumn{3}{|l|}{\cellcolor{verde} \textcolor{white}{\bf Disciplina}} & \multicolumn{2}{|l|}{\cellcolor{verde} \textcolor{white}{\bf Período}} \\
-\multicolumn{3}{|l|}{#1} & \multicolumn{2}{|l|}{#2} \\ }
-
-\newcommand{\prerequisito}[1] {
-\tbltitulo{Pré-requisito} \\
-\multicolumn{5}{|p{.96\textwidth}|}{#1} \\ }
-
-\newcommand{\docente}[1] {
-\tbltitulo{Docente} \\
-\multicolumn{5}{|p{.96\textwidth}|}{#1} \\ }
-
-\newcommand{\carga}[5] {
-\tbltitulodois{C.H. Total} & \tbltitulodois{C.H. Teórica}  & \tbltitulodois{C.H. Prática}  & \tbltitulodois{C. H. Presencial}  & \tbltitulodois{C.H. à Distância}\\
-#1 horas & #2 horas & #3 horas & #4 horas & #5 horas \\ }
-
-\newcommand{\ementa}[1] {
-\tbltitulo{Ementa} \\
-\multicolumn{5}{|p{.96\textwidth}|}{#1} \\ }
-
-\newcommand{\objetivos}[1] {
-\tbltitulo{Objetivos} \\
-\multicolumn{5}{|p{.96\textwidth}|}{#1} \\ }
-
-\newcommand{\tblconteudopresencial}{
-\tbltitulo{Conteúdo Programático - Módulo Presencial} \\
-\hline
-\cellcolor{cinza}\textcolor{white} {\bf Aula} & \multicolumn{4}{|c|}{\cellcolor{cinza}\textcolor{white} {\bf Conteúdo}}\\ }
-
-\newcommand{\tblconteudodistancia}[1] {
-\tbltitulo{Conteúdo Programático - Módulo à Distância ou semi-presencial} \\
-\hline
-\cellcolor{cinza}\textcolor{white} {\bf Aula} & \multicolumn{4}{|c|}{\cellcolor{cinza}\textcolor{white} {\bf Conteúdo}}\\ }
-
-\newcommand{\conteudo}[2] {
-#1 & \multicolumn{4}{|p{0.768\textwidth}|}{#2}\\
-\hline }
-
-\newcommand{\metodologia}[5] {
-\tbltitulo{Metodologia e Procedimentos de Ensino} \\
-\hline
-\multicolumn{5}{|l|}{\cellcolor{cinza}\textcolor{white}{\bf Atividades Teóricas}} \\
-\multicolumn{5}{|p{.96\textwidth}|}{#1} \\
-\hline
-\multicolumn{5}{|l|}{\cellcolor{cinza}\textcolor{white}{\bf Atividades Práticas}}\\
-\multicolumn{5}{|p{.96\textwidth}|}{#2} \\
-\hline
-\multicolumn{5}{|l|}{\cellcolor{cinza}\textcolor{white}{\bf Atividades à Distância}}\\
-\multicolumn{5}{|p{.96\textwidth}|}{#3} \\
-\hline
-\multicolumn{5}{|l|}{\cellcolor{cinza}\textcolor{white}{\bf Atividades Interdisciplinares}}\\
-\multicolumn{5}{|p{.96\textwidth}|}{#4} \\
-\hline
-\multicolumn{5}{|l|}{\cellcolor{cinza}\textcolor{white}{\bf Recursos Humanos, Materiais e Tecnológicos}}\\
-\multicolumn{5}{|p{.96\textwidth}|}{#5} \\ }
-
-
-\newcommand{\avaliacao}[1] {
-\tbltitulo{Procedimento de Avaliação} \\
-\multicolumn{5}{|p{.96\textwidth}|}{#1} \\ }
-
-
-\newcommand{\bibbasica}[1] {
-\tbltitulo{Bibliogafia Básica} \\
-\multicolumn{5}{|p{.96\textwidth}|}{#1} \\ }
-
-\newcommand{\bibcomplementar}[1] {
-\tbltitulo{Bibliografia Complementar} \\
-\multicolumn{5}{|p{.96\textwidth}|}{#1} \\ }
-
-\newcommand{\assinatura}[1] {
-\vfill
-\noindent\begin{minipage}{\textwidth}
-\hfill Palmas TO, \today .\\
-\vspace{8mm}
-\begin{center}
-\large{\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ \\
-#1}
-\end{center}
-\end{minipage}}
-}
-% ------------------------------------------------------------------------------------------------------ %
-% Fim Plano Ensino
-% ------------------------------------------------------------------------------------------------------ %
-
-
-% ------------------------------------------------------------------------------------------------------ %
-% Inicio Avaliação
-% ------------------------------------------------------------------------------------------------------ %
-
-\DeclareOption{exam}{
-
-\geometry{a4paper,left=2cm,right=2cm,top=3.2cm,bottom=2cm,headheight=2.2cm}
-
-% ------------------------------------------------------------------------------------------------------ %
-\newcommand\class[1]{%
-  \global\def\local@class{#1}%
-}
-% ------------------------------------------------------------------------------------------------------ %
-
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[L]{
-\large{\local@deptstring\ de \local@deptname\ \\
-\textbf{Disciplina}: \local@class\ \\
-\textbf{Prof.}: \@authname\ \@authsurn 
-}}
-\lfoot{P\'agina \thepage\ de \pageref{LastPage} }
-
-\newcommand{\makeheader} {
-\hspace*{\dimexpr-2\fboxsep-\fboxrule} \fbox{
-\noindent\begin{minipage}{\textwidth}
-\large{Nome: \hspace{0.6\textwidth} Matrícula:}
-\end{minipage}}
-%\vspace{1mm}
+\newcommand\global@monthname{\ifcase\month\or
+  Janeiro\or Fevereiro\or Mar{\c c}o\or Abril\or Maio\or Junho\or
+  Julho\or Agosto\or Setembro\or Outubro\or Novembro\or Dezembro\fi}
+  
+\newcommand{\descricao}[1]{
+  \global\def\local@descricao{#1}
 }
 
 \renewcommand\maketitle{
+%\begin{vwcol}[widths={0.1,0.5},rule=1pt] 
+\newpage
+\thispagestyle{empty}
+\noindent
+\begin{minipage}{.8\textwidth}
+\begin{flushright}\renewcommand{\familydefault}{\sfdefault}\normalfont
+UNIVERSIDADE FEDERAL DO {\bf TOCANTINS} \vspace{-.1\baselineskip} \\
+PRÓ-REITORIA DE {\bf GRADUAÇÃO} \vspace{-.1\baselineskip} \\
+CAMPUS DE {\bf\MakeUppercase \local@city} \vspace{-.1\baselineskip} \\
+CURSO DE  {\bf\MakeUppercase \local@deptname} \vspace{-.5\baselineskip}\\
+\noindent\makebox[\linewidth]{\rule{\textwidth}{.5pt}}\vspace{-.2\baselineskip}
+\small\fontfamily{phv}\fontseries{mc}\selectfont
+\local@address\ | \local@cep\ | \local@city /TO \vspace{-.2\baselineskip} \\
+\local@phone\ | www.uft.edu.br | \local@mail 
+\end{flushright}
+\end{minipage}% This must go next to `\end{minipage}`
+\begin{minipage}{.225\textwidth}
+\centering
+\includegraphics[scale=.4]{logouft}
+\end{minipage}
+ %\end{vwcol}
+ 
 \begin{center}
-\large{\textbf{\local@title}}\par
-\@termyear\ / \@termnumber
+\mybox{\bf PROGRAMA DE DISCIPLINA \\ \MakeUppercase{\local@title}}
 \end{center}
+
+\begin{center}
+\begin{tabular}{|p{3.2cm}|l|l|l|}
+\rowcolor{cor} \multicolumn{4}{c}{\color{cortexto}\bf INFORMAÇÕES GERAIS} \\
+\hline
+{\bf Código:} \local@codigo & {\bf Créditos:} \local@creditos & {\bf Carga Horária:} \local@carga\ horas-aula & {\bf Tipo:} \local@tipo\\
+\hline
+\multicolumn{3}{|l|}{{\bf Turma:} \local@turma} & {\bf Semestre:} \@termyear / \@termnumber \\
+\hline
+\multicolumn{3}{|l|}{{\bf Professor:} \@authname\ \@authsurn} & {\bf Matrícula:} \local@matricula  \\
+\hline
+\end{tabular}
+\end{center}
+
+}
+
+\newcommand{\colorsection}[2]{%
+  \colorbox{cor}{\parbox{\dimexpr\textwidth-2\fboxsep}{\color{cortexto}\MakeUppercase{ #1~.~#2}}}}
+\renewcommand{\thechapter}{\arabic{chapter}}
+\titleformat{\chapter}[display]
+  {\bf}
+  {}
+  {-5pt}
+  {\colorsection\thechapter}
+\titlespacing*{\chapter}{0pt}{0pt}{\baselineskip}
+
+
+\newcommand{\colorsectionss}[2]{%
+  \colorbox{white}{\parbox{\dimexpr\textwidth-2\fboxsep}{\color{black} #1~.~#2}}}
+%\renewcommand{\thesection}{\arabic{section}}
+\titleformat{\section}[display]
+  {\bf}
+  {}
+  {-15pt}
+  {\colorsectionss\thesection}
+\titlespacing*{\section}{0pt}{0pt}{\baselineskip}
+
+
+\renewpagestyle{plain}{%
+  \setfoot{}{}{\thepage}%
+}
+\pagestyle{plain}
+
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
+\setlength{\parindent}{0cm}
+\renewcommand{\baselinestretch}{1.}
+
+\newcommand\class[1]{%
+  \global\def\local@class{#1}%
 }
 
 \newcommand{\receipt} {
@@ -321,7 +308,7 @@ BACHARELADO EM CI\^ENCIA DA COMPUTA\c{C}\~AO}}
 \noindent\makebox[\linewidth]{\hdashrule{\paperwidth}{1pt}{1pt}}
 \hspace*{\dimexpr-2\fboxsep-\fboxrule} \fbox{
 \noindent\begin{minipage}{\textwidth}
- \local@deptstring\ de \local@deptname\  \\
+Curso de \local@deptname\  \\
 \textbf{Disciplina}: \local@class\ \hfill \local@title\  - \@termyear\ / \@termnumber \hfill \textbf{Nota:} \_\_\_\_\_\_\_ \\ 
 \textbf{Prof.}: \@authname\ \@authsurn\ \\
 Data: \_\_\_\_/\_\_\_\_/\_\_\_\_ \hfill  Assinatura: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ 
@@ -335,7 +322,86 @@ Data: \_\_\_\_/\_\_\_\_/\_\_\_\_ \hfill  Assinatura: \_\_\_\_\_\_\_\_\_\_\_\_\_\
 \end{enumerate}
 }
 
-\URCornerWallPaper{.6}{logouft2}
+\patchcmd{\chapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
+
+\newcommand{\makeheader} {
+\hspace*{\dimexpr-2\fboxsep-\fboxrule} \fbox{
+\noindent\begin{minipage}{\textwidth}
+\large{Nome: \hspace{0.6\textwidth} Matrícula:}
+\end{minipage}}
+}
+
+\newcount\@conteudo\@conteudo0
+\newcommand\conteudo[1]{%
+  \global\@namedef{uftexContent:\expandafter\the\@conteudo}{#1}
+  \global\advance\@conteudo by 1
+}
+
+\newcommand{\imprimirConteudo} {
+\begin{mdframed}
+%\begin{longtable}{|p{.95\textwidth}|}
+%\hline
+%\rowcolor{gray}  {\bf Conteúdo Programático} \\ \hline
+    \count1=0
+    \count2=1
+   \relax\@whilenum \count1<\@conteudo \do { %
+    \ifnum\count2=\@conteudo  
+        \the\count2\ -- \protect\csname uftexContent:\the\count1 \endcsname\ 
+    \else
+        \the\count2\ -- \protect\csname uftexContent:\the\count1 \endcsname\ \par
+    \fi
+   \advance\count2 by 1
+   \advance\count1 by 1} 
+%   \\  \hline
+%\end{longtable}
+\end{mdframed}
+}
+
+
+% ------------------------------------------------------------------------------------------------------ %
+
+\DeclareOption{consuni}{
+   \colorlet{cor}{azul}
+}
+
+\DeclareOption{consepe}{
+   \colorlet{cor}{verde}
+}
+
+\DeclareOption{geral}{
+   \colorlet{cor}{amarelo}
+   \colorlet{cortexto}{preto}
+}
+
+
+% ------------------------------------------------------------------------------------------------------ %
+% Inicio Avaliação
+% ------------------------------------------------------------------------------------------------------ %
+
+\DeclareOption{exam}{
+
+\geometry{a4paper,left=2cm,right=2cm,top=4.5cm,bottom=2cm,headsep=1cm,headheight=4cm,voffset=-1.5cm}
+
+\renewcommand{\mybox}[1]{\par\noindent%\colorbox{white}
+{\parbox{.6\textwidth-2\fboxsep\relax}{\color{black} #1}}}
+
+\sethead{
+\mybox{\large{\textbf{Disciplina}: \local@class\ \\
+\textbf{Prof.}: \@authname\ \@authsurn }
+}}{}{\mybox{\includegraphics[scale=.04]{logo-novo-ccomp-uft3}}}
+
+%\headrule
+
+\setfoot{}{}{P\'agina \thepage\ de \pageref{LastPage} }
+
+\renewcommand\maketitle{
+\begin{center}
+\large{\textbf{\local@title}}\par
+\@termyear\ / \@termnumber
+\end{center}
+}
+
+%\URCornerWallPaper{.25}{logo-novo-ccomp-uft3}
 
 }
 % ------------------------------------------------------------------------------------------------------ %
