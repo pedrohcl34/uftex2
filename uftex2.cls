@@ -331,10 +331,10 @@ Data: \_\_\_\_/\_\_\_\_/\_\_\_\_ \hfill  Assinatura: \_\_\_\_\_\_\_\_\_\_\_\_\_\
 \end{minipage}}
 }
 
-\newcount\@conteudo\@conteudo0
+\newcounter{conteudo}
 \newcommand\conteudo[1]{%
-  \global\@namedef{uftexContent:\expandafter\the\@conteudo}{#1}
-  \global\advance\@conteudo by 1
+  \global\@namedef{uftexContent:\expandafter\the\c@conteudo}{#1}
+  \global\addtocounter{conteudo}{1}
 }
 
 \newcommand{\imprimirConteudo} {
@@ -344,8 +344,8 @@ Data: \_\_\_\_/\_\_\_\_/\_\_\_\_ \hfill  Assinatura: \_\_\_\_\_\_\_\_\_\_\_\_\_\
 %\rowcolor{gray}  {\bf Conteúdo Programático} \\ \hline
     \count1=0
     \count2=1
-   \relax\@whilenum \count1<\@conteudo \do { %
-    \ifnum\count2=\@conteudo  
+   \relax\@whilenum \count1<\value{conteudo} \do { %
+    \ifnum\count2=\value{conteudo}  
         \the\count2\ -- \protect\csname uftexContent:\the\count1 \endcsname\ 
     \else
         \the\count2\ -- \protect\csname uftexContent:\the\count1 \endcsname\ \par
@@ -355,6 +355,7 @@ Data: \_\_\_\_/\_\_\_\_/\_\_\_\_ \hfill  Assinatura: \_\_\_\_\_\_\_\_\_\_\_\_\_\
 %   \\  \hline
 %\end{longtable}
 \end{mdframed}
+
 }
 
 
@@ -380,7 +381,7 @@ Data: \_\_\_\_/\_\_\_\_/\_\_\_\_ \hfill  Assinatura: \_\_\_\_\_\_\_\_\_\_\_\_\_\
 
 \DeclareOption{exam}{
 
-\geometry{a4paper,left=2cm,right=2cm,top=4.5cm,bottom=2cm,headsep=1cm,headheight=4cm,voffset=-1.5cm}
+\geometry{a4paper,left=2cm,right=2cm,top=4.5cm,bottom=.5cm,headsep=1cm,headheight=4cm,voffset=-1.5cm}
 
 \renewcommand{\mybox}[1]{\par\noindent%\colorbox{white}
 {\parbox{.6\textwidth-2\fboxsep\relax}{\color{black} #1}}}
